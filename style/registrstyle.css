@@ -1,0 +1,28 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+.main {
+	background: #ffb400;
+    height: 700px;
+    width: 780px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+}
+
+#brick {
+    width: 40px;
+    height: 20px;
+    background: #EE6B47;
+    position: absolute;
+    cursor: pointer;
+}
+
+#path {
+    outline: 1px solid #E8C48E;
+    width: 540px;
+    height: 20px;
+    position: relative;
+    background: #fff;
+}

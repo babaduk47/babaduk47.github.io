@@ -65,6 +65,16 @@ input,textarea{
     box-shadow: 0 0 70px 0 rgba(0,0,0,1)!important;
 }
 
+.logo__image {
+    height: 64px;
+}
+
+.logo__name {
+    font-size: 20px;
+    margin-left: -25px;
+    color: #fff;
+}
+
 
 /* Header */
 
@@ -287,15 +297,35 @@ input,textarea{
 
 .about__description {
     width: 100%;
-    padding: 15px 70px;
-    font-family: 'Roboto', sans-serif;
-    font-style: normal;
-    font-weight: 600;
+    display: block;
+}
+
+.about__description__caption {
     font-size: 23px;
     line-height: 35px;
     letter-spacing: 0.01em;
     color: #454545;
-/*    padding: 25px 0 20px;*/
+    padding: 15px 70px;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+}
+
+.about__context {
+    text-align: center;
+    color: #585858;
+    padding: 0 40px;
+}
+
+.about__price {
+    font-size: 23px;
+    line-height: 35px;
+    letter-spacing: 0.01em;
+    color: #141414;
+    padding-top: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 600;
 }
 
 /* Presale */

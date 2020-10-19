@@ -110,12 +110,13 @@
 }
 
 .slider__item_photo {
-    height: 600px;
+    height: auto;
 }
 
 .slider__item_photo img {
-    height: 600px;
-    width: auto;
+    width: 100%;
+    max-width: 1000px;
+    height: auto;
 }
 
 .photo__title {

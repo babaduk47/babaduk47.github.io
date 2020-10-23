@@ -694,6 +694,20 @@ input,textarea{
         font-size: 40px;
     }
 
+    .shop {
+        padding-top: 0px;
+        padding-bottom: 40px;
+    }
+
+    .presale {
+        padding-top: 0px;
+        padding-bottom: 20px;
+    }
+
+    .about {
+        padding-bottom: 10px;
+    }
+
 
 }
 

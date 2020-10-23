@@ -649,9 +649,12 @@ input,textarea{
     .about__item {
         width: 100%;
         margin-top: 20px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid #efbad3;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #a163f5;
+    }
 
+    .about__item.last__item {
+        border-bottom: 0px;
     }
 
     .about__title {

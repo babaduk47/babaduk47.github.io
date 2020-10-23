@@ -600,13 +600,18 @@ input,textarea{
     }
 
     .shop__icon img {
-        height: 20px;
-        width: 20px;
+        height: auto;
+        width: 40%;
     }
 
-    .presale__icon img{
-        height: 20px;
-        width: 20px;
+    .presale__icon img,.shop__icon img{
+        height: auto;
+        width: 100%;
+    }
+
+    .presale__icon,.shop__icon {
+        height: auto;
+        width: 40%;
     }
 
     .header__logo{
@@ -650,7 +655,7 @@ input,textarea{
         width: 100%;
         margin-top: 20px;
         padding-bottom: 20px;
-/*        border-bottom: 1px solid #a163f5;*/
+        border-bottom: 1px solid #a163f5;
     }
 
     .about__item.last__item {
@@ -681,7 +686,23 @@ input,textarea{
         box-shadow: 0 0 20px 0 rgba(0,0,0,0.3)!important;
     }
 
+    .presale__description,.shop__description {
+        font-size: 16px;
+    }
 
+    .presale__caption,.shop__caption {
+        font-size: 40px;
+    }
+
+
+}
+
+
+@media (max-width:500px){
+    .presale__caption,.shop__caption {
+        font-size: 30px;
+        line-height: 1;
+    }
 }
 
 @media (max-width:375px){

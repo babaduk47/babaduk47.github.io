@@ -70,12 +70,27 @@ input,textarea{
 
 .logo__image {
     height: 64px;
+    cursor: pointer;
 }
 
 .logo__name {
     font-size: 20px;
     margin-left: -25px;
     color: #fff;
+}
+
+/* Icon__box*/
+
+.icon__box__img,.icon__box__img__footer {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+}
+
+.icon__box,.icon__box__footer {
+    display: flex;
+    text-align: center;
+    position: relative;
 }
 
 
@@ -165,6 +180,34 @@ input,textarea{
     color: #fff;
     text-decoration: none;
 }
+
+.nav__link.mobile,.nav__footer__link.mobile {
+    visibility: hidden;
+}
+
+
+.icon__box__nav__link,.icon__box__nav__link__footer {
+    display: block;
+}
+
+.icon__box__nav__link__icon,.icon__box__nav__link__icon__footer {
+    position: absolute;
+    z-index: 5;
+    left: 20px;
+    top: -20px;
+
+}
+
+/*
+.icon__box__nav__link__icon2 {
+
+}
+*/
+
+.icon__box__nav__link__icon:last-child,.icon__box__nav__link__icon__footer:last-child {
+    left: 70px;
+}
+
 
 /* Application */
 
@@ -490,13 +533,38 @@ input,textarea{
 
 @media (max-width:1100px){
     .nav__item,.nav__footer__item {
-        margin-right: 45px;
+        margin-right: 38px;
     }
 }
 
 
 
 @media (max-width:1000px){
+
+    .nav__footer__link.mobile {
+        display: none;
+/*        display: inline-block;*/
+    }
+
+
+    .icon__box__footer {
+        display: block;
+        text-align: center;
+    }
+
+    .icon__box__img__footer {
+        position: unset;
+    }
+
+    .icon__box__nav__link__icon__footer {
+        position: unset;
+    }
+
+
+    .nav__footer__item {
+        text-align: center;
+    }
+
     .nav__item {
         text-align: left;
         display: block;
@@ -587,6 +655,26 @@ input,textarea{
     .mobile__application__caption {
         display: block;
     }
+
+
+
+    .icon__box {
+        display: block;
+        text-align: center;
+    }
+
+    .icon__box__img {
+        position: unset;
+    }
+
+    .icon__box__nav__link__icon {
+        position: unset;
+    }
+
+    .nav__link.mobile {
+        display: none;
+    }
+
 
     .application__caption {
         display: none;

@@ -8,24 +8,18 @@
 </head>
 <body>
 
-  <a-scene embedded arjs>
+    <a-scene embedded arjs>
         <a-marker type='pattern' url='pattern-market.patt'>
-            <a-entity
-            position="0 -1 0"
-            scale="0.05 0.05 0.05"
-            gltf-model="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
-            ></a-entity>
+             <a-entity obj-model="obj: url(1.obj); mtl: url(1.mtl)"
+            scale="0.05 0.05 0.05" rotation="-90 0 0"></a-entity>
         </a-marker>
 
         <a-marker preset='hiro'>
-             <a-entity obj-model="obj: url(1.obj); mtl: url(1.mtl)"
-            scale="0.05 0.05 0.05" rotation="-90 0 0"></a-entity>
-
-<!--              <a-box position='0 0.5 0' material='color: green;'></a-box>-->
+             <a-sphere position='0 0.5 0' material='color: green;'></a-sphere>
         </a-marker>
+
         <a-entity camera></a-entity>
     </a-scene>
-
 
 </body>
 </html>

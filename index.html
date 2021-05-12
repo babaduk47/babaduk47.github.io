@@ -9,13 +9,18 @@
 <body>
 
     <a-scene embedded arjs>
+         <a-assets>
+            <a-asset-item id="animated-asset" src="https://caralgorithm.ru/stop-ar-api/getInfo.php?id=1"></a-asset-item>
+        </a-assets>
         <a-marker type='pattern' url='pattern-market.patt'>
-             <a-entity obj-model="obj: url(1.obj); mtl: url(1.mtl)"
-            scale="0.05 0.05 0.05" rotation="-90 0 0"></a-entity>
+
         </a-marker>
 
         <a-marker preset='hiro'>
-             <a-sphere position='0 0.5 0' material='color: green;'></a-sphere>
+             <a-entity
+                gltf-model="#animated-asset"
+                scale="2">
+            </a-entity>
         </a-marker>
 
         <a-entity camera></a-entity>

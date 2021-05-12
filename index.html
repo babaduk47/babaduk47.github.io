@@ -10,17 +10,14 @@
 
     <a-scene embedded arjs>
          <a-assets>
-            <a-asset-item id="animated-asset" src="https://caralgorithm.ru/stop-ar-api/getInfo.php?id=1"></a-asset-item>
+            <img id="transpImage" src="https://caralgorithm.ru/stop-ar-api/getInfo.php?id=1">
         </a-assets>
         <a-marker type='pattern' url='pattern-market.patt'>
 
         </a-marker>
 
         <a-marker preset='hiro'>
-             <a-entity
-                gltf-model="#animated-asset"
-                scale="2">
-            </a-entity>
+             <a-image width="1" height="1" src="#transpImage"></a-image>
         </a-marker>
 
         <a-entity camera></a-entity>

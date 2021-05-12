@@ -9,15 +9,13 @@
 <body>
 
     <a-scene embedded arjs>
-         <a-assets>
-            <img crossorigin ="anonymous" id="transpImage" src="https://caralgorithm.ru/stop-ar-api/getInfo.php?id=1">
-        </a-assets>
+
         <a-marker type='pattern' url='pattern-market.patt'>
 
         </a-marker>
 
         <a-marker preset='hiro'>
-             <a-image  width="1" height="1" src="#transpImage"></a-image>
+             <a-box position = "-2 1 -3" material="src:https://caralgorithm.ru/stop-ar-api/getInfo.php?id=1"></a-box>
         </a-marker>
 
         <a-entity camera></a-entity>

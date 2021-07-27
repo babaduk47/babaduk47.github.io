@@ -1,27 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>AR/VR Lab1</title>
-     <script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Name Website</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <script src="/assets/js/app.js"></script>
+    <script src="/assets/js/ui.js"></script>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/assets/images/logo-96x96.png">
+    <meta name="apple-mobile-web-app-status-bar" content="#FFE1C4">
+    <meta name="theme-color" content="#FFE1C4">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
 </head>
+
 <body>
-
-    <a-scene embedded arjs>
-         <a-assets>
-            <img crossorigin ="anonymous" id="transpImage" src="https://caralgorithm.ru/stop-ar-api/getInfo.php?id=1">
-        </a-assets>
-        <a-marker type='pattern' url='pattern-market.patt'>
-
-        </a-marker>
-
-        <a-marker preset='hiro'>
-             <a-image  width="1" height="1" src="#transpImage"></a-image>
-        </a-marker>
-
-        <a-entity camera></a-entity>
-    </a-scene>
-
+    <h1>Static cache PWA</h1>
 </body>
+
 </html>

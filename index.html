@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Yulka</title>
+    <script src="https://vk.com/js/api/openapi.js?169" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.1/howler.min.js"></script>
+    <link rel="shortcut icon" href="favicon.ico" type="image/png">
+</head>
+<body>
+
+<style>
+
+    #Yulka {
+        display: flex;
+        width: 100%;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+        font-size: 2px;
+        font-weight: 700;
+        color: #fff;
+        transition: all 1s ease-in;
+    }
+
+    #Yulka.good {
+        font-size: 32px;
+        color: green;
+    }
+
+    #Yulka.bad {
+        font-size: 108px;
+        color: #e62626;
+    }
+
+    #Yulka.ff {
+        font-size: 10px;
+        color: #fff;
+    }
+</style>
+
+<div id="Yulka">
+</div>
+
+<audio id="myAudio">
+    <source src="1.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+<script>
+    function WOW(){
+        var sound = new Howl({
+            src: ['1.mp3'],
+            volume: 0.5,
+            onend: function () {
+                // alert('Finished!');
+                sound.play();
+            }
+        });
+        sound.play();
+    }
+</script>
+
+    <script type="text/javascript">
+
+        const interval = setInterval(function () {
+            start();
+        }, 1000);
+        start();
+        WOW();
+        Howler.volume(0);
+
+
+        function start() {
+            var script = document.createElement('SCRIPT');
+            Yulka = document.getElementById("Yulka");
+            Yulka.classList.add('ff');
+
+            script.src = "https://api.vk.com/method/users.get?user_ids=71406109&fields=relation,relation_partner&name_case=Nom&access_token=1da187289658017d8750a3af826c36b966f371506fa9bf207eb0bff778b20d54cc77831a26ebee1f920c8&v=5.131&callback=callbackFunc";
+            document.getElementsByTagName("head")[0].appendChild(script);
+
+        }
+
+        function callbackFunc(result) {
+
+            Yulka = document.getElementById("Yulka");
+            
+            Yulka.classList.remove('good');
+            Yulka.classList.remove('bad');
+            Yulka.classList.remove('ff');
+
+            console.log(result.response[0]);
+
+            if(result.response[0].relation!=7) {
+                Yulka.innerHTML = "Юлька обиделась:(";
+                Howler.volume(0.5);
+                Yulka.classList.add('bad');
+
+                return;
+            }
+            if(result.response[0].relation_partner)
+                if(result.response[0].relation_partner.id==236083668) {
+                    Yulka.classList.add('good');
+                    Yulka.innerHTML = "Все ОК";
+                    Howler.volume(0);
+                    return;
+                }
+            Yulka.classList.add('bad');
+            Yulka.innerHTML = "У Юльки другой:(";
+
+
+            Howler.volume(0.5);
+
+
+        }
+
+    </script>
+</body>
+</html>

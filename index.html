@@ -95,7 +95,15 @@
 
             console.log(result.response[0]);
 
-            if(result.response[0].relation!=7 || result.response[0].relation!=4) {
+            if(result.response[0].relation!=7) {
+
+            	if(result.response[0].relation == 4){
+            		Yulka.classList.add('good');
+                    Yulka.innerHTML = "Все ОК";
+                    Howler.volume(0);
+                    return;
+            	}
+
                 Yulka.innerHTML = "Юлька обиделась:(";
                 Howler.volume(0.5);
                 Yulka.classList.add('bad');

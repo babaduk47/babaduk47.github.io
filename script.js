@@ -36,7 +36,6 @@ function getQueryParam(param) {
 }
 
 function initGrid(date) {
-    // Выбор карты на основе даты
     const map = maps[date];
     if (!map) {
         console.error('Карта для данной даты не найдена!');
@@ -47,10 +46,8 @@ function initGrid(date) {
     key = map.key;
     exitPosition = map.exitPosition;
 
-    // Очистка предыдущего содержимого
     grid.innerHTML = '';
 
-    // Создание блоков
     blocks.forEach(block => {
         const div = document.createElement('div');
         div.classList.add(block.id === key.id ? 'key' : 'block', block.color);
@@ -62,7 +59,6 @@ function initGrid(date) {
         grid.appendChild(div);
     });
 
-    // Создание выхода
     const exit = document.createElement('div');
     exit.classList.add('exit');
     exit.style.transform = `translate(${exitPosition.x * blockSize}px, ${exitPosition.y * blockSize}px)`;
@@ -71,41 +67,53 @@ function initGrid(date) {
 }
 
 function addEventListeners() {
-    grid.addEventListener('mousedown', (e) => {
+    function onStart(e) {
         const blockElement = e.target.closest('.block, .key');
         if (blockElement) {
             selectedBlock = blocks.find(b => b.id === parseInt(blockElement.dataset.id));
             const rect = blockElement.getBoundingClientRect();
-            startX = e.clientX - rect.left;
-            startY = e.clientY - rect.top;
-            document.addEventListener('mousemove', onMouseMove);
+            startX = (e.clientX || e.touches[0].clientX) - rect.left;
+            startY = (e.clientY || e.touches[0].clientY) - rect.top;
+            document.addEventListener('mousemove', onMove);
+            document.addEventListener('touchmove', onMove, { passive: false });
+            document.addEventListener('mouseup', onEnd);
+            document.addEventListener('touchend', onEnd);
         }
-    });
+    }
 
-    document.addEventListener('mouseup', () => {
+    function onMove(e) {
+        e.preventDefault();
         if (selectedBlock) {
-            document.removeEventListener('mousemove', onMouseMove);
+            const clientX = e.clientX || e.touches[0].clientX;
+            const clientY = e.clientY || e.touches[0].clientY;
+            moveBlockWithMouse(clientX, clientY);
+        }
+    }
+
+    function onEnd() {
+        if (selectedBlock) {
+            document.removeEventListener('mousemove', onMove);
+            document.removeEventListener('touchmove', onMove);
+            document.removeEventListener('mouseup', onEnd);
+            document.removeEventListener('touchend', onEnd);
             selectedBlock = null;
         }
-    });
+    }
+
+    grid.addEventListener('mousedown', onStart);
+    grid.addEventListener('touchstart', onStart, { passive: false });
 }
 
 function getMousePosition(e) {
-    const mouseX = e.clientX - grid.getBoundingClientRect().left;
-    const mouseY = e.clientY - grid.getBoundingClientRect().top;
+    const mouseX = (e.clientX || e.touches[0].clientX) - grid.getBoundingClientRect().left;
+    const mouseY = (e.clientY || e.touches[0].clientY) - grid.getBoundingClientRect().top;
     return { mouseX, mouseY };
 }
 
-function onMouseMove(e) {
-    if (selectedBlock) {
-        moveBlockWithMouse(e);
-    }
-}
-
-function moveBlockWithMouse(e) {
+function moveBlockWithMouse(clientX, clientY) {
     if (hasWon) return;
 
-    const { mouseX, mouseY } = getMousePosition(e);
+    const { mouseX, mouseY } = getMousePosition({ clientX, clientY });
 
     const x = Math.floor((mouseX - startX) / blockSize);
     const y = Math.floor((mouseY - startY) / blockSize);
@@ -141,27 +149,18 @@ function checkWin(block) {
 
     if (block.id !== key.id) return;
 
-    console.log(block.x);
-    console.log(exitPosition.x);
-
-    if (block.x + block.width === exitPosition.x && block.y === exitPosition.y) {
+    if (block.x <= exitPosition.x && block.x + block.width >= exitPosition.x &&
+        block.y <= exitPosition.y && block.y + block.height >= exitPosition.y) {
         hasWon = true;
         alert('Успех! Вы выиграли!');
     }
-
-    // if (block.x <= exitPosition.x && block.x + block.width > exitPosition.x && block.y === exitPosition.y) {
-    //     hasWon = true;
-    //     alert('Успех! Вы выиграли!');
-    // }
 }
 
-// Получение даты из GET-параметра
 const dateParam = getQueryParam('date');
-const date = dateParam || '2024-07-21'; // Замените на дату по умолчанию, если параметр не передан
+const date = dateParam || '2024-07-21';
 
 const dateDisplay = document.getElementById('date-display');
 dateDisplay.textContent = dateParam;
 
-// Инициализация карты на основе переданной даты
 initGrid(date);
 addEventListeners();

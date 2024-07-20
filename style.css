@@ -71,7 +71,7 @@ body {
 .exit {
     width: 60px;
     height: 60px;
-    background-color: #2ecc71;
+    background-color: #2e53cc;
     position: absolute;
     z-index: -1;
     display: flex;

@@ -1,0 +1,97 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #333;
+}
+
+#game-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#grid {
+    display: grid;
+    grid-template-columns: repeat(6, 60px);
+    grid-template-rows: repeat(6, 60px);
+    position: relative;
+    border: 2px solid #555;
+    background-color: #444;
+}
+
+#grid::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(#555 1px, transparent 1px), linear-gradient(to right, #555 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+}
+
+.block {
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin: 5px; */
+}
+
+.red {
+    background-color: #e74c3c;
+}
+
+.green {
+    background-color: #2ecc71;
+}
+
+.key {
+    border-radius: 20px;
+    background-color: #f1c40f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    -webkit-user-select: none; /* Chrome/Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE/Edge */
+    user-select: none; /* Стандартный синтаксис */
+}
+
+.exit {
+    width: 60px;
+    height: 60px;
+    background-color: #2ecc71;
+    position: absolute;
+    z-index: -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    color: #fff;
+    font-weight: bold;
+}
+
+#date-display {
+    color: #2ecc71;
+    padding-left: 10px;
+}
+
+.date-wraper {
+    display: flex;
+    color: #fff;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}

@@ -4,21 +4,21 @@ const gridSize = 6;
 const maps = {
     '2024-07-21': {
         blocks: [
-            { id: 1, x: 0, y: 1, width: 1, height: 2, direction: 'vertical', color: 'red' },
-            { id: 2, x: 1, y: 0, width: 1, height: 3, direction: 'vertical', color: 'red' },
-            { id: 3, x: 0, y: 3, width: 2, height: 1, direction: 'horizontal', color: 'green' },
-            { id: 4, x: 0, y: 4, width: 1, height: 2, direction: 'vertical', color: 'red' },
-            { id: 5, x: 1, y: 5, width: 2, height: 1, direction: 'horizontal', color: 'green' },
-            { id: 6, x: 3, y: 0, width: 1, height: 2, direction: 'vertical', color: 'red' },
-            { id: 7, x: 4, y: 1, width: 1, height: 3, direction: 'vertical', color: 'red' },
-            { id: 8, x: 5, y: 4, width: 1, height: 2, direction: 'vertical', color: 'red' },
-            { id: 9, x: 2, y: 3, width: 1, height: 2, direction: 'vertical', color: 'red' },
-            { id: 10, x: 4, y: 0, width: 2, height: 1, direction: 'horizontal', color: 'green' },
-            { id: 11, x: 3, y: 4, width: 2, height: 1, direction: 'horizontal', color: 'green' },
-            { id: 12, x: 2, y: 2, width: 2, height: 1, direction: 'horizontal', color: 'blue' },
+            {id: 1, x: 0, y: 1, width: 1, height: 2, direction: 'vertical', color: 'red'},
+            {id: 2, x: 1, y: 0, width: 1, height: 3, direction: 'vertical', color: 'red'},
+            {id: 3, x: 0, y: 3, width: 2, height: 1, direction: 'horizontal', color: 'green'},
+            {id: 4, x: 0, y: 4, width: 1, height: 2, direction: 'vertical', color: 'red'},
+            {id: 5, x: 1, y: 5, width: 2, height: 1, direction: 'horizontal', color: 'green'},
+            {id: 6, x: 3, y: 0, width: 1, height: 2, direction: 'vertical', color: 'red'},
+            {id: 7, x: 4, y: 1, width: 1, height: 3, direction: 'vertical', color: 'red'},
+            {id: 8, x: 5, y: 4, width: 1, height: 2, direction: 'vertical', color: 'red'},
+            {id: 9, x: 2, y: 3, width: 1, height: 2, direction: 'vertical', color: 'red'},
+            {id: 10, x: 4, y: 0, width: 2, height: 1, direction: 'horizontal', color: 'green'},
+            {id: 11, x: 3, y: 4, width: 2, height: 1, direction: 'horizontal', color: 'green'},
+            {id: 12, x: 2, y: 2, width: 2, height: 1, direction: 'horizontal', color: 'blue'},
         ],
-        key: { id: 12, x: 2, y: 2, width: 2, height: 1, direction: 'horizontal' },
-        exitPosition: { x: 6, y: 2 }
+        key: {id: 12, x: 2, y: 2, width: 2, height: 1, direction: 'horizontal'},
+        exitPosition: {x: 6, y: 2}
     }
 };
 
@@ -46,7 +46,7 @@ function initGrid(date) {
         console.error('Карта для данной даты не найдена!');
         return;
     }
-    
+
     blocks = map.blocks;
     key = map.key;
     exitPosition = map.exitPosition;
@@ -85,7 +85,7 @@ function addEventListeners() {
             startX = (e.clientX || e.touches[0].clientX) - rect.left;
             startY = (e.clientY || e.touches[0].clientY) - rect.top;
             document.addEventListener('mousemove', onMove);
-            document.addEventListener('touchmove', onMove, { passive: false });
+            document.addEventListener('touchmove', onMove, {passive: false});
             document.addEventListener('mouseup', onEnd);
             document.addEventListener('touchend', onEnd);
         }
@@ -111,19 +111,19 @@ function addEventListeners() {
     }
 
     grid.addEventListener('mousedown', onStart);
-    grid.addEventListener('touchstart', onStart, { passive: false });
+    grid.addEventListener('touchstart', onStart, {passive: false});
 }
 
 function getMousePosition(e) {
     const mouseX = (e.clientX || e.touches[0].clientX) - grid.getBoundingClientRect().left;
     const mouseY = (e.clientY || e.touches[0].clientY) - grid.getBoundingClientRect().top;
-    return { mouseX, mouseY };
+    return {mouseX, mouseY};
 }
 
 function moveBlockWithMouse(clientX, clientY) {
     if (hasWon) return;
 
-    const { mouseX, mouseY } = getMousePosition({ clientX, clientY });
+    const {mouseX, mouseY} = getMousePosition({clientX, clientY});
 
     const newX = Math.floor((mouseX - startX) / blockSize);
     const newY = Math.floor((mouseY - startY) / blockSize);
@@ -197,7 +197,7 @@ function checkWin(block) {
     }
 }
 
-timerButton.addEventListener('click', function() {
+timerButton.addEventListener('click', function () {
     timerButton.textContent = `00:00:30`;
     timerButton.disabled = true;
 
@@ -218,9 +218,43 @@ timerButton.addEventListener('click', function() {
     timerButton.removeEventListener('click', arguments.callee); // Отключаем кнопку после первого нажатия
 });
 
-refreshButton.addEventListener('click', function() {
+refreshButton.addEventListener('click', function () {
     location.reload();
 });
+
+function startCountdown(targetDate) {
+    const countdown = document.getElementById('update-puzzle-time');
+    const updateBlock = document.getElementById('update-puzzle');
+    updateBlock.style.display = 'flex';
+
+    function updateCountdown() {
+        const now = new Date();
+        const distance = targetDate - now.getTime();
+
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        countdown.innerText = '≈ ' +
+            String(hours).padStart(2, '0') + ':' +
+            String(minutes).padStart(2, '0') + ':' +
+            String(seconds).padStart(2, '0');
+
+        if (distance < 0) {
+            clearInterval(interval);
+            countdown.innerText = "00:00:00";
+        }
+    }
+
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
+}
+
+const targetDate = new Date('Sun Jul 21 2024 20:30:00 GMT+0000').getTime();
+
+if (targetDate > new Date().getTime()) {
+    startCountdown(targetDate);
+}
 
 const dateParam = getQueryParam('date');
 const date = dateParam || '2024-07-21';

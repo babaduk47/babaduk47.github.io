@@ -8,17 +8,37 @@
 </head>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BL7SQ719F9"></script>
 <script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
+    window.dataLayer = window.dataLayer || [];
 
-gtag('config', 'G-BL7SQ719F9');
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-BL7SQ719F9');
 </script>
 <body>
-    <div id="game-container">
-        <div class="date-wraper">Date : <div id="date-display"><div id="date-display"></div></div></div>
-        <div id="grid"></div>
+<div id="game-container">
+    <div class="caption">
+        <div id="caption-hamster">Humster</div>
+        <div id="caption-puzzle">Puzzle</div>
     </div>
-    <script src="script.js"></script>
+    <div class="date-wraper">
+        <div id="date-label">Date:</div>
+        <div id="date-display"></div>
+    </div>
+    <div id="grid"></div>
+    <div class="footer">
+        <div id="footer-social">
+            <a href="https://t.me/v_stasiuk47" target="_blank">
+                <img src="telegram-logo.jpeg" alt="telegram logo">
+                feedback
+            </a>
+        </div>
+        <div id="footer-version">v1.2.1</div>
+    </div>
+</div>
+<script src="script.js"></script>
 </body>
 </html>

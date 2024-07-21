@@ -51,11 +51,16 @@ function initGrid(date) {
     blocks.forEach(block => {
         const div = document.createElement('div');
         div.classList.add(block.id === key.id ? 'key' : 'block', block.color);
+        div.classList.add(block.direction);
         div.style.width = `${block.width * blockSize}px`;
         div.style.height = `${block.height * blockSize}px`;
         div.style.transform = `translate(${block.x * blockSize}px, ${block.y * blockSize}px)`;
         div.dataset.id = block.id;
-        div.innerHTML = block.id === key.id ? '🔑' : '';
+        const childDiv = document.createElement('div');
+        childDiv.classList.add('block-child');
+        childDiv.innerHTML = block.id === key.id ? '🔑' : '';
+        div.appendChild(childDiv);
+
         grid.appendChild(div);
     });
 
@@ -160,7 +165,7 @@ const dateParam = getQueryParam('date');
 const date = dateParam || '2024-07-21';
 
 const dateDisplay = document.getElementById('date-display');
-dateDisplay.textContent = dateParam;
+dateDisplay.textContent = date;
 
 initGrid(date);
 addEventListeners();

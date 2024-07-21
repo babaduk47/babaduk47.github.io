@@ -29,6 +29,11 @@ let hasWon = false;
 let blocks = [];
 let key = {};
 let exitPosition = {};
+let timeLeft = 29;
+
+const refreshButton = document.getElementById('refreshButton');
+const timerButton = document.getElementById('timerButton');
+let countdown;
 
 function getQueryParam(param) {
     const urlParams = new URLSearchParams(window.location.search);
@@ -157,9 +162,43 @@ function checkWin(block) {
     if (block.x <= exitPosition.x && block.x + block.width >= exitPosition.x &&
         block.y <= exitPosition.y && block.y + block.height >= exitPosition.y) {
         hasWon = true;
-        alert('Успех! Вы выиграли!');
+        clearInterval(countdown);
+        let timeText = '';
+        if (timeLeft < 29) {
+            let diff = 29 - timeLeft;
+            let prettyDiff = diff < 10 ? `0${diff}` : diff;
+            timeText = `00:00:${prettyDiff}`;
+        }
+
+        alert('Успех! Вы выиграли!' + (timeText ? ` Ваше время: ${timeText}` : ''));
+        location.reload();
     }
 }
+
+timerButton.addEventListener('click', function() {
+    timerButton.textContent = `00:00:30`;
+    timerButton.disabled = true;
+
+    countdown = setInterval(() => {
+        if (timeLeft <= 0) {
+            clearInterval(countdown);
+            timerButton.textContent = `00:00:00`;
+
+            alert(':( Время вышло! Попробуйте еще раз!');
+            location.reload();
+        } else {
+            let prettyTime = timeLeft < 10 ? `0${timeLeft}` : timeLeft;
+            timerButton.textContent = `00:00:${prettyTime}`;
+            timeLeft--;
+        }
+    }, 1000);
+
+    timerButton.removeEventListener('click', arguments.callee); // Отключаем кнопку после первого нажатия
+});
+
+refreshButton.addEventListener('click', function() {
+    location.reload();
+});
 
 const dateParam = getQueryParam('date');
 const date = dateParam || '2024-07-21';

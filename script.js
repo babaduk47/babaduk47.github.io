@@ -1,4 +1,4 @@
-const blockSize = 60;
+const blockSize = 55;
 const gridSize = 6;
 
 const maps = {

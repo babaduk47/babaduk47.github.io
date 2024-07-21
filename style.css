@@ -297,7 +297,7 @@ input,textarea{
     padding: 5px 0;
     position: absolute;
     z-index: 1;
-    bottom: 125%; /* Position above the tooltip */
+    top: 125%; /* Position above the tooltip */
     left: 50%;
     margin-left: -250px;
     opacity: 0;

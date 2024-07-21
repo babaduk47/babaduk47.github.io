@@ -15,7 +15,7 @@ const maps = {
             { id: 9, x: 2, y: 3, width: 1, height: 2, direction: 'vertical', color: 'red' },
             { id: 10, x: 4, y: 0, width: 2, height: 1, direction: 'horizontal', color: 'green' },
             { id: 11, x: 3, y: 4, width: 2, height: 1, direction: 'horizontal', color: 'green' },
-            { id: 12, x: 2, y: 2, width: 2, height: 1, direction: 'horizontal'},
+            { id: 12, x: 2, y: 2, width: 2, height: 1, direction: 'horizontal', color: 'blue' },
         ],
         key: { id: 12, x: 2, y: 2, width: 2, height: 1, direction: 'horizontal' },
         exitPosition: { x: 6, y: 2 }
@@ -125,28 +125,50 @@ function moveBlockWithMouse(clientX, clientY) {
 
     const { mouseX, mouseY } = getMousePosition({ clientX, clientY });
 
-    const x = Math.floor((mouseX - startX) / blockSize);
-    const y = Math.floor((mouseY - startY) / blockSize);
+    const newX = Math.floor((mouseX - startX) / blockSize);
+    const newY = Math.floor((mouseY - startY) / blockSize);
 
     if (selectedBlock.direction === 'horizontal') {
-        if (x >= 0 && x + selectedBlock.width <= gridSize && canMove(selectedBlock, x, selectedBlock.y)) {
-            selectedBlock.x = x;
+        if (newX >= 0 && newX + selectedBlock.width <= gridSize && canMove(selectedBlock, newX, selectedBlock.y)) {
+            selectedBlock.x = newX;
         }
     } else if (selectedBlock.direction === 'vertical') {
-        if (y >= 0 && y + selectedBlock.height <= gridSize && canMove(selectedBlock, selectedBlock.x, y)) {
-            selectedBlock.y = y;
+        if (newY >= 0 && newY + selectedBlock.height <= gridSize && canMove(selectedBlock, selectedBlock.x, newY)) {
+            selectedBlock.y = newY;
         }
     }
+
     updateBlockPosition(selectedBlock);
     checkWin(selectedBlock);
 }
 
-function canMove(block, x, y) {
-    return !blocks.some(b => b !== block && isColliding(b, x, y, block.width, block.height));
+function canMove(block, newX, newY) {
+    if (block.direction === 'horizontal') {
+        const step = block.x < newX ? 1 : -1;
+        for (let x = block.x; x !== newX; x += step) {
+            if (!canMoveInDirection(block, x + step, block.y)) {
+                return false;
+            }
+        }
+    } else if (block.direction === 'vertical') {
+        const step = block.y < newY ? 1 : -1;
+        for (let y = block.y; y !== newY; y += step) {
+            if (!canMoveInDirection(block, block.x, y + step)) {
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
 function isColliding(block, x, y, width, height) {
     return !(x + width <= block.x || x >= block.x + block.width || y + height <= block.y || y >= block.y + block.height);
+}
+
+function canMoveInDirection(block, x, y) {
+    const isBlockedByOtherBlocks = blocks.some(b => b !== block && isColliding(b, x, y, block.width, block.height));
+
+    return !isBlockedByOtherBlocks;
 }
 
 function updateBlockPosition(block) {

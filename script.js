@@ -268,9 +268,11 @@ function startCountdown(targetDate) {
     const interval = setInterval(updateCountdown, 1000);
 }
 
-const targetDate = new Date('Sun Jul 21 2024 20:00:00 GMT+0000').getTime();
+const targetDate = new Date('Sun Jul 22 2024 20:30:00 GMT+0000').getTime();
+const beforeFourHours = new Date(targetDate - 4 * 60 * 60 * 1000).getTime();
+const nowTime = new Date().getTime();
 
-if (targetDate > new Date().getTime()) {
+if (targetDate > nowTime && beforeFourHours < nowTime) {
     startCountdown(targetDate);
 }
 

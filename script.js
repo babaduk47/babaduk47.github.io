@@ -149,7 +149,12 @@ function initGrid(date) {
         div.dataset.id = block.id;
         const childDiv = document.createElement('div');
         childDiv.classList.add('block-child');
-        childDiv.innerHTML = block.id === key.id ? '🔑' : '';
+
+        if (document.body.classList.contains('hamster-theme')) {
+            childDiv.innerHTML = '';
+        } else {
+            childDiv.innerHTML = block.id === key.id ? '🔑' : '';
+        }
         div.appendChild(childDiv);
 
         grid.appendChild(div);

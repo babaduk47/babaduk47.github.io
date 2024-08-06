@@ -56,7 +56,7 @@ async function loginClient(gameNumber) {
         const result = await response.json();
         return result.clientToken;
     } catch (error) {
-
+        return loginClient(gameNumber);
     }
 }
 

@@ -54,6 +54,12 @@ async function loginClient(gameNumber) {
             body: JSON.stringify(data)
         });
         const result = await response.json();
+
+        if (result.error_code === 'TooManyIpRequest') {
+            console.log('Too many requests');
+            await new Promise(resolve => setTimeout(resolve, 10000));
+            return loginClient(gameNumber);
+        }
         return result.clientToken;
     } catch (error) {
         return loginClient(gameNumber);
@@ -86,11 +92,12 @@ async function registerEvent(token, gameNumber) {
             console.log('Retry register event');
             return registerEvent(token, gameNumber);
         } else {
-            return true;
+            return token;
         }
     } catch (error) {
         console.error('Fatal error:', error.message);
-        return registerEvent(token, gameNumber);
+        let newToken = await loginClient(gameNumber);
+        return registerEvent(newToken, gameNumber);
     }
 }
 
@@ -161,9 +168,9 @@ async function generate() {
     for (let i = 0; i < 4; i++) {
         tasks.push((async (index) => {
             try {
-                const token = await loginClient(selectedGame);
-                await registerEvent(token, selectedGame);
-                codes[index] = await createCode(token, selectedGame);
+                let token = await loginClient(selectedGame);
+                let registerToken = await registerEvent(token, selectedGame);
+                codes[index] = await createCode(registerToken, selectedGame);
             } catch (error) {
                 codes[index] = `Error: ${error.message}`;
             }

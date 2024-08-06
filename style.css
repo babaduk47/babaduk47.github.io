@@ -12,7 +12,7 @@ body {
     background-color: #0e0e10;
 }
 
-h1, h2, h3, h4 ,h5 ,h6{
+h1, h2, h3, h4, h5, h6 {
     margin: 0;
 }
 
@@ -20,8 +20,24 @@ h1, h2, h3, h4 ,h5 ,h6{
     overflow: hidden;
 }
 
-input,textarea{
+input, textarea {
     outline: none;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none;
 }
 
 .container {
@@ -214,7 +230,7 @@ input,textarea{
     color: #FFFFFF;
     cursor: pointer;
     flex-shrink: 0;
-    font-family: "Inter UI","SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif;
+    font-family: "Inter UI", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     font-size: 16px;
     font-weight: 500;
     height: 3rem;
@@ -416,4 +432,15 @@ input,textarea{
 
 .hamster-theme .key {
     padding: 0;
+}
+
+.key-generator {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.key-generator-link {
+    color: #f1c40f;
+    margin-left: 15px;
 }

@@ -1,0 +1,61 @@
+.game-names-label {
+    margin-right: 10px;
+}
+
+#process-generate {
+    width: 100%;
+    margin-top: 10px;
+    /*display: none;*/
+}
+
+#process-generate-block {
+    margin-top: 15px;
+    display: none;
+}
+
+#generateButton {
+    margin-top: 15px;
+}
+
+#keys-block {
+    margin-top: 15px;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.key-group {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 14px;
+}
+
+.key-label {
+    margin-right: 10px;
+}
+
+.key-value {
+    color: #f1c40f;
+}
+
+.generate-time-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#generate-time-value {
+    display: inline-block;
+    background-color: #D93334;
+    color: white;
+    font-size: 0.75em;
+    font-weight: bold;
+    padding: 0.2em 0.5em;
+    border-radius: 0.5em;
+    text-transform: uppercase;
+    position: relative;
+    margin-left: 10px;
+    margin-right: 10px;
+}
